@@ -12,7 +12,7 @@ class ScreenConfirmation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Confirmation'),
+        title: Text('Konfirmasi'),
       ),
       body: Center(
         child: Column(
