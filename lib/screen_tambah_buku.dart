@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ScreenTambahBuku extends StatefulWidget {
   const ScreenTambahBuku({Key? key}) : super(key: key);
@@ -19,8 +22,31 @@ class _ScreenTambahBukuState extends State<ScreenTambahBuku> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Tambah Buku Baru'),
-                Text('Pastiin produknya benar'),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Tambah Buku Baru',
+                  style: GoogleFonts.croissantOne(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  // style: TextStyle(
+                  //   fontFamily: 'MADE TOMMY',
+                  //   fontSize: 20,
+                  //   fontWeight: FontWeight.w700,
+                  // ),
+                ),
+                Text(
+                  'Pastiin produknya benar',
+                  style: TextStyle(
+                    fontFamily: 'MADE TOMMY',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
                 Container(
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(horizontal: 20),
@@ -40,6 +66,9 @@ class _ScreenTambahBukuState extends State<ScreenTambahBuku> {
                             textAlign: TextAlign.center,
                           ),
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: 'Stok Sewa',
@@ -48,7 +77,25 @@ class _ScreenTambahBukuState extends State<ScreenTambahBuku> {
                       ],
                     ),
                   ),
-                )
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.black),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Text('Simpan'),
+                  ),
+                ),
               ],
             ),
           ),
