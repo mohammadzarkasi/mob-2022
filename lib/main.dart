@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:mob2022/screen_confirm.dart';
+import 'package:mob2022/screen_tambah_buku.dart';
 
 main() {
   runApp(MyApp());
@@ -146,6 +147,12 @@ class _ScreenSigninState extends State<ScreenSignin> {
                     if (formkey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Berhasil login')));
+                      Future.delayed(Duration(seconds: 5), () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (_) {
+                          return ScreenTambahBuku();
+                        }));
+                      });
                     } else {}
                   }
                 },
