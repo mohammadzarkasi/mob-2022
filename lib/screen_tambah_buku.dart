@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mob2022/screen_kamera.dart';
 
 class ScreenTambahBuku extends StatefulWidget {
   const ScreenTambahBuku({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class _ScreenTambahBukuState extends State<ScreenTambahBuku> {
       body: SafeArea(
         child: Container(
           width: double.infinity,
+          decoration: BoxDecoration(),
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           child: SingleChildScrollView(
             child: Column(
@@ -53,9 +55,19 @@ class _ScreenTambahBukuState extends State<ScreenTambahBuku> {
                   child: Form(
                     child: Column(
                       children: [
-                        Image.asset(
-                          'assets/imgs/blank.png',
-                          height: 100,
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (_) {
+                              return ScreenKamera();
+                            }));
+                          },
+                          child: Container(
+                            width: 200,
+                            height: 100,
+                            padding: EdgeInsets.all(8),
+                            child: Image.asset('assets/imgs/blank.png'),
+                          ),
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 70),
