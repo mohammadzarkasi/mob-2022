@@ -81,8 +81,6 @@ class _ScreenSigninState extends State<ScreenSignin> {
                 contentPadding: EdgeInsets.symmetric(
                   horizontal: 5,
                 ),
-                // focusColor: Color.fromRGBO(206, 255, 188, 1),
-                // hoverColor: Color.fromRGBO(206, 255, 188, 1),
                 fillColor: Color.fromRGBO(206, 255, 188, 1),
                 filled: true,
                 prefixIcon: Image.asset(
@@ -147,13 +145,15 @@ class _ScreenSigninState extends State<ScreenSignin> {
                     if (formkey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Berhasil login')));
-                      Future.delayed(Duration(seconds: 5), () {
+                      Future.delayed(Duration(seconds: 1), () {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (_) {
                           return ScreenTambahBuku();
                         }));
                       });
-                    } else {}
+                    } else {
+                      print('ada inputan belum valid');
+                    }
                   }
                 },
                 child: Text(
