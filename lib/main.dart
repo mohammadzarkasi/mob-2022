@@ -92,7 +92,7 @@ class _ScreenSigninState extends State<ScreenSignin> {
             SizedBox(
               height: 40,
             ),
-            _buildBtnLogin(),
+            _buildBtns(),
           ],
         ),
       ),
@@ -101,36 +101,40 @@ class _ScreenSigninState extends State<ScreenSignin> {
 
   TextFormField _buildUsername() {
     return TextFormField(
-            controller: ctrlUsername,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: 5,
-              ),
-              fillColor: Color.fromRGBO(206, 255, 188, 1),
-              filled: true,
-              prefixIcon: Image.asset(
-                'assets/imgs/profil.png',
-                height: 12,
-              ),
-            ),
-            validator: (val) {
-              if (val == null) {
-                return 'tidak boleh kosong';
-              }
-              if (val.length < 3) {
-                return 'Minimal 3 karakter';
-              }
-              return null;
-            },
-          );
+      controller: ctrlUsername,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: 5,
+        ),
+        fillColor: Color.fromRGBO(206, 255, 188, 1),
+        filled: true,
+        prefixIcon: Image.asset(
+          'assets/imgs/profil.png',
+          height: 12,
+        ),
+      ),
+      validator: (val) {
+        if (val == null) {
+          return 'tidak boleh kosong';
+        }
+        if (val.length < 3) {
+          return 'Minimal 3 karakter';
+        }
+        return null;
+      },
+    );
   }
 
   TextFormField _buildPassword() {
     return TextFormField(
       controller: ctrlPassword,
       decoration: InputDecoration(
-        border: OutlineInputBorder(),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
         contentPadding: EdgeInsets.symmetric(
           horizontal: 5,
         ),
@@ -160,40 +164,67 @@ class _ScreenSigninState extends State<ScreenSignin> {
     );
   }
 
-  Container _buildBtnLogin() {
+  Container _buildBtns() {
     return Container(
       width: double.infinity,
       alignment: Alignment.center,
-      child: ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.white),
-          foregroundColor: MaterialStateProperty.all(Colors.black),
-          padding: MaterialStateProperty.all(
-            EdgeInsets.symmetric(horizontal: 25),
-          ),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _buildBtnLogin(),
+          ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.red.shade600),
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
             ),
+            onPressed: () {
+              ctrlPassword.clear();
+              ctrlUsername.clear();
+            },
+            child: Text('Reset'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  ElevatedButton _buildBtnLogin() {
+    return ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.white),
+        foregroundColor: MaterialStateProperty.all(Colors.black),
+        padding: MaterialStateProperty.all(
+          EdgeInsets.symmetric(horizontal: 25),
+        ),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
           ),
         ),
-        onPressed: () {
-          if (formkey.currentState != null) {
-            if (formkey.currentState!.validate()) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Berhasil login')));
-              Future.delayed(Duration(seconds: 1), () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                  return ScreenTambahBuku();
-                }));
-              });
-            } else {
-              print('ada inputan belum valid');
-            }
+      ),
+      onPressed: () {
+        if (formkey.currentState != null) {
+          //trigger semua fungsi validasi pada bidang inputan
+          if (formkey.currentState!.validate()) {
+            //semua bidang inputan valid
+            //show notifikasi di bawah
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Berhasil login')));
+            //lakukan 1 detik kemudian
+            Future.delayed(Duration(seconds: 1), () {
+              //lakukan navigasi
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                return ScreenTambahBuku();
+              }));
+            });
           }
-        },
-        child: Text(
-          'LOGIN',
-        ),
+          //ada bidang inputan yang tidak valid
+          else {
+            print('ada inputan belum valid');
+          }
+        }
+      },
+      child: Text(
+        'LOGIN',
       ),
     );
   }
