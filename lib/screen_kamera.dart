@@ -81,6 +81,8 @@ class _ScreenKameraState extends State<ScreenKamera> {
 
                     if (image != null) {
                       print('image disimpan di ${image.path}');
+                      //kembali ke layar sebelumnya dengan membawa data berupa alamat file
+                      Navigator.of(context).pop(image.path);
                     }
                   },
                   icon: Icon(Icons.camera),

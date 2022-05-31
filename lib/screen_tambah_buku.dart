@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mob2022/screen_kamera.dart';
@@ -12,6 +14,7 @@ class ScreenTambahBuku extends StatefulWidget {
 }
 
 class _ScreenTambahBukuState extends State<ScreenTambahBuku> {
+  var img_buku = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,17 +59,25 @@ class _ScreenTambahBukuState extends State<ScreenTambahBuku> {
                     child: Column(
                       children: [
                         InkWell(
-                          onTap: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (_) {
+                          onTap: () async {
+                            var _img = await Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                               return ScreenKamera();
                             }));
+                            //jika screen kamera me-return sesuatu
+                            if (_img != null) {
+                              //jika screen kamera me-return string, maka itu adalah gambar hasil tangkap kamera
+                              if (_img is String) {
+                                setState(() {
+                                  img_buku = _img;
+                                });
+                              }
+                            }
                           },
                           child: Container(
                             width: 200,
-                            height: 100,
+                            height: 150,
                             padding: EdgeInsets.all(8),
-                            child: Image.asset('assets/imgs/blank.png'),
+                            child: img_buku.isEmpty ? Image.asset('assets/imgs/blank.png') : Image.file(File(img_buku)),
                           ),
                         ),
                         Container(
