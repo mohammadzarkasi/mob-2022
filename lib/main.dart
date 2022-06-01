@@ -1,10 +1,14 @@
 // ignore_for_file: prefer_const_constructors, unused_import
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mob2022/screen_confirm.dart';
 import 'package:mob2022/screen_tambah_buku.dart';
 
-main() {
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -55,9 +59,12 @@ class _ScreenSigninState extends State<ScreenSignin> {
                 children: [
                   Image.asset('assets/imgs/icon.png'),
                   Text('Agristore'),
-                  SizedBox(
-                    height: 80,
-                  ),
+                  SizedBox(height: 40),
+                  Text('Login',
+                      style: TextStyle(
+                        fontSize: 30,
+                      )),
+                  SizedBox(height: 15),
                   _buildFormLogin(),
                 ],
               ),
@@ -209,15 +216,19 @@ class _ScreenSigninState extends State<ScreenSignin> {
           if (formkey.currentState!.validate()) {
             //semua bidang inputan valid
             //show notifikasi di bawah
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text('Berhasil login')));
-            //lakukan 1 detik kemudian
-            Future.delayed(Duration(seconds: 1), () {
-              //lakukan navigasi
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                return ScreenTambahBuku();
-              }));
-            });
+
+            // ScaffoldMessenger.of(context)
+            //     .showSnackBar(SnackBar(content: Text('Berhasil login')));
+            // //lakukan 1 detik kemudian
+            // Future.delayed(Duration(seconds: 1), () {
+            //   //lakukan navigasi
+            //   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+            //     return ScreenTambahBuku();
+            //   }));
+            // });
+            _doLogin();
+
+            //
           }
           //ada bidang inputan yang tidak valid
           else {
@@ -229,5 +240,27 @@ class _ScreenSigninState extends State<ScreenSignin> {
         'LOGIN',
       ),
     );
+  }
+
+  _doLogin() async {
+    try {
+      var email = ctrlUsername.text;
+      var pass = ctrlPassword.text;
+      print('sedang login...');
+      var res = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      print('hasil login:');
+      print(res);
+    } catch (ex) {
+      print('exception login');
+      print(ex.runtimeType);
+      if (ex is FirebaseAuthException) {
+        print(ex);
+        print(ex.message);
+      }
+    }
   }
 }
