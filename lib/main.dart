@@ -1,10 +1,12 @@
-// ignore_for_file: prefer_const_constructors, unused_import
+// ignore_for_file: prefer_const_constructors, unused_import, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, non_constant_identifier_names, avoid_print
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mob2022/screen_confirm.dart';
+import 'package:mob2022/screen_list_buku.dart';
 import 'package:mob2022/screen_tambah_buku.dart';
+import 'package:mob2022/signup.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +33,7 @@ class ScreenSignin extends StatefulWidget {
 }
 
 class _ScreenSigninState extends State<ScreenSignin> {
-  String username = 'agus', password = '123456';
+  // String username = 'agus', password = '123456';
   var show_password = false;
 
   var ctrlUsername = TextEditingController();
@@ -186,11 +188,20 @@ class _ScreenSigninState extends State<ScreenSignin> {
                   borderRadius: BorderRadius.circular(20))),
             ),
             onPressed: () {
+              // var username = ctrlUsername.text;
+              // ctrlUsername.text = 'helo';
               ctrlPassword.clear();
               ctrlUsername.clear();
             },
             child: Text('Reset'),
           ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return ScreenSignup();
+                }));
+              },
+              child: Text('Daftar')),
         ],
       ),
     );
@@ -249,11 +260,15 @@ class _ScreenSigninState extends State<ScreenSignin> {
       print('sedang login...');
       var res = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
-        password: password,
+        password: pass,
       );
 
       print('hasil login:');
       print(res);
+      Navigator.push(context, MaterialPageRoute(builder: (_) {
+        return ScreenListBuku();
+        // return ScreenTambahBuku();
+      }));
     } catch (ex) {
       print('exception login');
       print(ex.runtimeType);

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, avoid_print
+// ignore_for_file: prefer_const_constructors, avoid_print, non_constant_identifier_names
 
 // import 'package:camera/camera.dart';
 import 'package:camera/camera.dart';
