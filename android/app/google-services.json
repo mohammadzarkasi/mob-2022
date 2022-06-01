@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "831516784133",
+    "project_id": "mob-2022",
+    "storage_bucket": "mob-2022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831516784133:android:9ed70f4bf6c7387ec34e6c",
+        "android_client_info": {
+          "package_name": "unej.ilkom.mob2022"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831516784133-lfjtu0tgquhfaljhishvvajiifq5eu19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkM-b0TbvwuWKX3NHD2r-LxxhngrFc7-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831516784133-lfjtu0tgquhfaljhishvvajiifq5eu19.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

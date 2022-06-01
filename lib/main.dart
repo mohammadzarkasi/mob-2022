@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:mob2022/screen_confirm.dart';
@@ -175,7 +175,8 @@ class _ScreenSigninState extends State<ScreenSignin> {
           ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.red.shade600),
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20))),
             ),
             onPressed: () {
               ctrlPassword.clear();
@@ -208,7 +209,8 @@ class _ScreenSigninState extends State<ScreenSignin> {
           if (formkey.currentState!.validate()) {
             //semua bidang inputan valid
             //show notifikasi di bawah
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Berhasil login')));
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text('Berhasil login')));
             //lakukan 1 detik kemudian
             Future.delayed(Duration(seconds: 1), () {
               //lakukan navigasi
