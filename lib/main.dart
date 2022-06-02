@@ -35,6 +35,7 @@ class ScreenSignin extends StatefulWidget {
 class _ScreenSigninState extends State<ScreenSignin> {
   // String username = 'agus', password = '123456';
   var show_password = false;
+  var err_msg = '';
 
   var ctrlUsername = TextEditingController();
   var ctrlPassword = TextEditingController();
@@ -62,10 +63,12 @@ class _ScreenSigninState extends State<ScreenSignin> {
                   Image.asset('assets/imgs/icon.png'),
                   Text('Agristore'),
                   SizedBox(height: 40),
-                  Text('Login',
-                      style: TextStyle(
-                        fontSize: 30,
-                      )),
+                  Text(
+                    'Login',
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
+                  ),
                   SizedBox(height: 15),
                   _buildFormLogin(),
                 ],
@@ -86,21 +89,21 @@ class _ScreenSigninState extends State<ScreenSignin> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Username'),
-            SizedBox(
-              height: 5,
-            ),
+            SizedBox(height: 5),
             _buildUsername(),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             Text('Password'),
-            SizedBox(
-              height: 5,
-            ),
+            SizedBox(height: 5),
             _buildPassword(),
-            SizedBox(
-              height: 40,
-            ),
+            SizedBox(height: 5),
+            if (err_msg.isNotEmpty)
+              Text(
+                err_msg,
+                style: TextStyle(
+                  color: Colors.red.shade600,
+                ),
+              ),
+            SizedBox(height: 40),
             _buildBtns(),
           ],
         ),
@@ -255,6 +258,9 @@ class _ScreenSigninState extends State<ScreenSignin> {
 
   _doLogin() async {
     try {
+      setState(() {
+        err_msg = '';
+      });
       var email = ctrlUsername.text;
       var pass = ctrlPassword.text;
       print('sedang login...');
@@ -275,6 +281,9 @@ class _ScreenSigninState extends State<ScreenSignin> {
       if (ex is FirebaseAuthException) {
         print(ex);
         print(ex.message);
+        setState(() {
+          err_msg = ex.message ?? 'kesalahan saat login.';
+        });
       }
     }
   }
